@@ -1,0 +1,144 @@
+import java.util.*;
+
+abstract class Processor {
+    double number;
+    final double PI = 3.142;
+
+    abstract void process();
+
+    void showData() {
+        System.out.println("Output : " + number);
+    }
+}
+
+class Factorial extends Processor {
+    void process() {
+        int fact = 1;
+        for (int i = 1; i <= number; i++) {
+            fact = fact * i;
+        }
+        number = fact;
+        System.out.println("FACTORIAL : " + fact);
+    }
+}
+
+class Circle1 extends Processor {
+    void process() {
+        number = (PI / 4) * number * number;
+        System.out.println("AREA Of CIRCLE : " + number);
+    }
+}
+
+public class Q48 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. Calculate Area :");
+        System.out.println("2. Calculate Factorial :");
+        System.out.println("Enter Your choice..!!");
+        int choice = sc.nextInt();
+        if (choice == 1) {
+            Circle1 c = new Circle1();
+            System.out.println("Enter Radius : ");
+            c.number = sc.nextDouble();
+            c.process();
+            c.showData();
+        } else {
+            Factorial f = new Factorial();
+            System.out.println("Enter Number For Factorial : ");
+            f.number = sc.nextDouble();
+            f.process();
+            f.showData();
+        }
+
+    }
+}
+======================================Q49==================================
+
+import java.util.Scanner;
+
+interface Taxable {
+    double salesTax = 7;
+    double incomeTax = 10.5;
+
+    double calcTax();
+}
+
+class Employee1 implements Taxable {
+    int empId;
+    String name;
+    double salary;
+
+    Employee1(int empId, String name, double salary) {
+        this.empId = empId;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public double calcTax() {
+        double tot1 = salary * (Taxable.salesTax / 100);
+        double tot2 = salary * (Taxable.incomeTax / 100);
+        return (salary - tot1 - tot2);
+    }
+
+    void show() {
+        System.out.println("EMP ID : " + empId);
+        System.out.println("NAME : " + name);
+        System.out.println("SALARY : " + salary);
+        System.out.println("incomeTax on yearly salary " + calcTax());
+    }
+
+}
+
+class Productt implements Taxable {
+
+    int pid, quantity;
+    double price;
+
+    Productt(int pid, Double price, int quantity) {
+        this.pid = pid;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public double calcTax() {
+        double tot1 = (price * quantity) * (Taxable.salesTax / 100);
+        double tot2 = (price * quantity) * (Taxable.incomeTax / 100);
+        return (price * quantity) - tot1 - tot2;
+    }
+
+    void show() {
+        System.out.println("PID : " + pid);
+        System.out.println("PRICE : " + price);
+        System.out.println("quantity : " + quantity);
+        System.out.println("incomeTax on yearly salary " + calcTax());
+    }
+
+}
+
+public class Q49 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("-----Enter Employe Info -----");
+        System.out.println("Enter Empid ");
+        int id = sc.nextInt();
+        System.out.println("Enter Name :");
+        sc.nextLine();
+        String nm = sc.nextLine();
+        System.out.println("Enter Salary :");
+        double sal = sc.nextDouble();
+        Employee1 e1 = new Employee1(id, nm, sal);
+        e1.calcTax();
+        e1.show();
+
+        System.out.println("-----Enter Product Info -----");
+        System.out.println("Enter pid ");
+        int idd = sc.nextInt();
+        System.out.println("Enter price :");
+        double nmm = sc.nextDouble();
+        System.out.println("Enter QTY. :");
+        int sall = sc.nextInt();
+        Productt p1 = new Productt(idd, nmm, sall);
+        p1.calcTax();
+        p1.show();
+    }
+}

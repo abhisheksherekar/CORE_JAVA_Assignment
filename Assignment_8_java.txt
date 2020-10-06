@@ -1,0 +1,199 @@
+//56.	Write a program to convert very first character of every word in uppercase in a String.
+
+package Q56;
+
+public class Q56 {
+
+	public static void main(String[] args) {
+		String str = "hello cdac mumbai and cdac juhu";
+		String s[]=str.split(" ");
+		for(String a : s) {
+			char c  = a.charAt(0);
+			int i = (int)c;
+			if(i > 96) {
+				i=i-32;
+			}
+			c=(char)i;
+			a=c+a.substring(1);
+			System.out.print(a+" ");
+		}
+	}
+
+}
+
+
+//57.	Write a program to reverse every word of the String.
+
+package Q57;
+
+public class Q57 {
+
+	public static void main(String[] args) {
+		String str = "Hello Cdac Mumbai And Cdac Juhu";
+		String s[]=str.split(" ");
+		for(String a : s) {
+			StringBuffer s1= new StringBuffer(a);
+			System.out.print(s1.reverse()+" ");
+		}
+	}
+
+}
+
+package Q58;
+
+import java.util.Scanner;
+
+public class Q58 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str[] = {"Sunday","Monday","Tuesday","Wednesday","Thusday","Firday","Saturday"};
+		System.out.println("Enter the day number : ");
+		int z = sc.nextInt();
+		try {
+			System.out.println("The day is : "+str[z]);
+		}catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("Enter Valid Value");
+		}
+	}
+}
+
+
+//59.	Create a class Voter(voterId, name, age) with parameterized constructor.  
+//The parameterized constructor should throw a checked exception if age is less than 18. 
+//The message of exception is “invalid age for voter ”
+
+package Q59;
+
+class Voter{
+	int voterId;
+	String vName;
+	int age;
+	
+	Voter(int voterId, String vName,int age ){
+		if(age<18) {
+			//System.out.println("Hello");
+			try {
+				throw new Exception("invalid age for voter");
+			} catch (Exception e) {
+				//e.printStackTrace();
+				System.out.println(e);
+			}
+		}
+		else {
+			//System.out.println("QQQQ");
+			this.age=age;
+			this.voterId=voterId;
+			this.vName=vName;
+		}
+		
+		
+			
+	}
+
+	
+	public String display() {
+		return "Voter [voterId=" + voterId + ", vName=" + vName + ", age=" + age + "]";
+	}
+	
+	
+}
+
+public class Q59 {
+
+	public static void main(String[] args) {
+		Voter a = new Voter(1,"Aditya",12);
+		System.out.println(a.display());
+		Voter a1 = new Voter(1,"Aditya",22);
+		System.out.println(a.display());
+	}
+	
+}
+//60.	Create Interface StudentFee and declare following method. 
+//getFee() throws InvalidFeeException. This method ask fees from user 
+//and throws exception if user enters invalid or negative fees Create
+//class Student with members (name, fees) and implement the StudentFee Interface.
+
+package Q60;
+
+import java.util.Scanner;
+
+interface StudentFee{
+	int getFee();
+}
+
+public class Q60 implements StudentFee {
+	
+	static String name;
+	int fee;
+	
+	public static void main(String[] args) {
+		System.out.println("Enter name : ");
+		Scanner sc = new Scanner(System.in);
+		Q60 q = new Q60();
+		q.name = sc.next();
+		q.fee = q.getFee();
+		System.out.println("Name : "+q.name+" Fee : "+q.fee);
+	}
+
+	@Override
+	public int getFee() {
+		System.out.println("Enter the Fee : ");
+		Scanner sc = new Scanner(System.in);
+		fee = sc.nextInt();
+		if(fee<0) {
+			try {
+				throw new Exception("InvalidFeeException");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			}
+		}else {
+		return fee;
+		}
+		return 0;
+	}
+
+}
+//61.	Create a Thread class to print following star (*) pattern on screen with delay of 1 second between each * print.
+//Number of lines in the pattern should be passed to the constructor of Thread class. 
+//*  * * * *  * * * * * * * * * * 
+//Use this class in main method and ask user to enter number of lines to print.
+
+package Q61;
+
+import java.util.Scanner;
+
+class MyThread extends Thread {
+	int num;
+	
+	public MyThread(int num) {
+		super();
+		this.num = num;
+	}
+
+	public void run() {
+		for(int i=1;i<=num;i++) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.print("*"+" ");
+		}
+		System.out.println("\nEND");
+	}
+}
+
+public class Q61 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number : ");
+		int n = sc.nextInt();
+		MyThread m = new MyThread(n);
+		m.start();
+	}
+
+}

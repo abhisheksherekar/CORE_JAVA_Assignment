@@ -1,0 +1,152 @@
+================================Q51=================================
+//50.	Explain the importance of toString() and equals() method of the Object class and override them on class 
+//Employee(empId,name,salary).  a. Create class for main method(say XYZ),and accept five employees information and 
+//store in an array. Also ensure if entered empId already exist or not (use equals method).  
+//b. Display all employee info using toString method.
+
+package Q50;
+
+import java.util.Scanner;
+
+class Employee {
+	//int empId;
+	String name;
+	int salary;
+	public int empId;
+	public Employee(int empId, String name, int salary) {
+		super();
+		this.empId = empId;
+		this.name = name;
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return empId + " " + name + " " + salary ;
+	}
+	
+	@Override
+	public boolean 	equals(Object obj) {
+			if(obj == null)
+				return false;
+			if(obj instanceof Employee) {
+				Employee emp = (Employee)obj;
+				if( empId == emp.empId) {
+					System.out.println("empId is already exists.");
+					return true;
+				}
+			}
+			return false;
+	}
+	
+	
+	
+}
+
+public class Q50 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Employee arr[]=new Employee[2];
+		for(int i=0;i<arr.length;i++) {
+			System.out.print("Enter the empId :");
+			int a=sc.nextInt();
+			System.out.print("Enter the name :");
+			String n=sc.next();
+			System.out.print("Enter the salary :");
+			int s=sc.nextInt();
+			arr[i]=	new Employee(a,n,s);
+			for(int j=0;j<i;j++) {
+				if(arr[i].equals(arr[j])) {
+					i--;
+					break;
+				}
+			}
+		}
+
+		for(Employee e:arr) {
+			System.out.println(e);
+		}
+		
+	}
+
+}
+
+====================================Q53==============================
+//53.	Input data exactly in the following format, and print sum of all
+//integer values. “67, 89, 23, 67, 12, 55, 66”.   
+//(Hint use String class split method and Integer class parseInt method) .
+public class Q53 {
+
+	public static void main(String[] args) {
+		String s1 ="67, 89, 23, 67, 12, 55, 66";
+		String [] str = s1.split(", ");
+		int a[]=new int[str.length];
+		int sum=0;
+		for(int i=0;i<a.length;i++)
+		{
+			a[i] = Integer.parseInt(str[i]);
+			sum=sum+a[i];
+		}
+		System.out.println("Sum = "+sum);
+
+	}
+
+}
+
+//54.	Write a program to reverse the given String.
+
+package Q54;
+
+import java.util.Scanner;
+
+public class Q54 {
+
+	public static void main(String[] args) {
+		Scanner sc  = new Scanner(System.in);
+		String s=sc.next();
+		StringBuilder str = new StringBuilder(s);
+		System.out.println(str);
+		str.reverse();
+		System.out.println(str);
+	}
+}
+//55.	Write a program to count no of words in the String.
+
+package Q55;
+
+import java.util.Scanner;
+
+public class Q55 {
+
+	public static void main(String[] args) {
+		//Scanner sc = new Scanner(System.in);
+		String str = "Hello CDAC Mumbai and CDAC Juhu";
+		String arr[] = str.split(" ");
+		int a = arr.length;
+		System.out.println(a);
+		
+	}
+
+}
+//56.	Write a program to convert very first character of every word in uppercase in a String.
+
+package Q56;
+
+public class Q56 {
+
+	public static void main(String[] args) {
+		String str = "hello cdac mumbai and cdac juhu";
+		String s[]=str.split(" ");
+		for(String a : s) {
+			char c  = a.charAt(0);
+			int i = (int)c;
+			if(i > 96) {
+				i=i-32;
+			}
+			c=(char)i;
+			a=c+a.substring(1);
+			System.out.print(a+" ");
+		}
+	}
+
+}
